@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+{% block content %}
+{% for object in object_list %}
+    {% if object.image %}
+
+    <div class="album py-3 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3l">
+                <div class="card" style="width: 24rem;">
+                        <img src="{{ object.image.url }}" class="card-img-top" alt=" ">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.title }}</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Continue reading...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% endif %}
+    {% endfor %}
+
+
+
+
+
+        <div class="paginator">
+            <span class="step-link">
+                {% if object_list.has_previous %}
+                    <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}">Previous</a>
+                {% endif %}
+            <span class="current">
+                {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+            </span>
+                {% if object_list.has_next %}
+                    <a href="?{{ page_request_var }}={{ object_list.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+

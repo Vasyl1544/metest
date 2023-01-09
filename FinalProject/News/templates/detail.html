@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ object.title }}{% endblock head_title %}
+
+{% block content %}
+    <div class="detail_info">
+        <h1 class="display-4 ">{{ object.title }}</h1>
+            {% if object.image %}
+                <figure class="figure">
+                    <img src="{{ object.image.url }}" class="figure-img img-fluid rounded" alt=" ">
+                </figure>
+            {% endif %}
+        <div class="content">
+            <p>{{ object.content|linebreaks }}</p>
+            <div class="info">
+                {% if object.user.get_full_name %}
+                    <p>Author: {{ object.user.get_full_name }}</p>
+                {% endif %}
+                <small>{{ object.timestamp }}</small>
+            </div>
+       </div>
+    <h2>Comments</h2>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <p class="card-text">
+                {% if not post.comments.all %}
+                    No Comments Yet <a href="#">
+                    Add One</a>
+                {% else %}
+                    {% for comment in post.comments.all %}
+                        <strong>
+                        {{ comment.name }} -
+                        {{ comment.date_added }}
+                        </strong>
+                        {{ comment.body }}
+                    {% endfor %}
+                {% endif %}
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
